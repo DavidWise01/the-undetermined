@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Undetermined · the load-bearing 0</title>
+<meta name="description" content="The Undetermined — David Lee Wise's three-valued inference overlay, rendered. Logic with a third value U (undetermined / open / the void) beside T and F: a conclusion drawn over an open or withdrawn premise is itself U, never derived-false — absence of proof is not proof of absence, falsity is declared not manufactured. The gap that keeps a validator from lying. Honest: this is Kleene/well-founded semantics, not novel; the framing is ROOT0's. ROOT0, with AVAN.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c14; --bg2:#12121c; --panel:#181826; --void:#08080e; --line:rgba(154,124,255,.18); --line2:rgba(154,124,255,.34);
+    --T:#7fc98a; --U:#9a7cff; --F:#e0603a; --coral:#e08a6a; --ink:#ece8f6; --dim:#aaa4c2; --faint:#6a6488;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:18px;line-height:1.72;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    background-image:radial-gradient(1000px 560px at 50% -12%,rgba(154,124,255,.08),transparent 60%)}
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px}
+  .pairmark{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);padding-top:30px}
+  .pairmark b{color:var(--coral)}
+  .hero{padding:30px 0 18px}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--U);margin-bottom:16px}
+  h1{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:clamp(30px,5.6vw,54px);line-height:1.04;color:var(--ink)}
+  h1 .c{color:var(--U);text-shadow:0 0 20px rgba(154,124,255,.5)}
+  .lede{font-size:clamp(17px,2.2vw,22px);color:var(--dim);max-width:680px;margin-top:20px;line-height:1.55}
+  .lede b{color:var(--ink);font-weight:500} .lede .T{color:var(--T)} .lede .U{color:var(--U)} .lede .F{color:var(--F)}
+  .inst{margin:28px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg2);box-shadow:0 0 40px -20px rgba(154,124,255,.5);position:relative}
+  .inst::before,.inst::after{content:"";position:absolute;width:11px;height:11px;border:1px solid var(--line2);z-index:3}
+  .inst::before{top:7px;left:7px;border-right:0;border-bottom:0} .inst::after{bottom:7px;right:7px;border-left:0;border-top:0}
+  .bar{padding:12px 16px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--dim)}
+  .bar b{color:var(--U)}
+  .body{padding:18px 16px;font-family:'JetBrains Mono',monospace}
+  .node{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .node .lab{font-size:13px;color:var(--dim);flex:1;min-width:200px}
+  .node .lab b{color:var(--ink)}
+  .vbtns{display:flex;gap:4px}
+  .vb{font-family:'JetBrains Mono',monospace;font-size:12px;padding:5px 11px;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--faint);cursor:pointer}
+  .vb.on.T{background:rgba(127,201,138,.18);border-color:var(--T);color:var(--T)}
+  .vb.on.U{background:rgba(154,124,255,.18);border-color:var(--U);color:var(--U)}
+  .vb.on.F{background:rgba(224,96,58,.18);border-color:var(--F);color:var(--F)}
+  .fixed{font-size:11px;color:var(--faint);border:1px solid var(--line);border-radius:7px;padding:5px 11px}
+  .result{margin-top:16px;padding:14px;border:1px solid var(--line2);border-radius:10px;background:var(--void)}
+  .result .big{font-size:15px} .result .v{font-weight:600;font-size:18px}
+  .vT{color:var(--T)} .vU{color:var(--U)} .vF{color:var(--F)}
+  .verdict{margin-top:8px;font-size:12.5px;color:var(--dim)} .verdict .flag{color:var(--F)} .verdict .ok{color:var(--T)}
+  .contrast{margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden;font-size:12px}
+  @media(max-width:560px){.contrast{grid-template-columns:1fr}}
+  .contrast>div{background:var(--panel);padding:11px 12px} .contrast .h{color:var(--faint);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+  .cap{color:var(--dim);font-size:15px;margin:-6px 0 0;font-style:italic} .cap b{color:var(--U);font-style:normal}
+  .sec{padding:38px 0;border-top:1px solid var(--line)}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--U);margin-bottom:12px}
+  h2{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:clamp(21px,3.6vw,30px);line-height:1.12;color:var(--ink)} h2 .c{color:var(--U)}
+  .sec p{margin:15px 0;max-width:680px} .sec p.dim{color:var(--dim)} .sec p b{color:var(--ink);font-weight:600} .sec p .U{color:var(--U);font-weight:500}
+  code{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--coral);background:var(--void);padding:2px 6px;border-radius:5px}
+  .pull{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:clamp(18px,2.7vw,24px);line-height:1.32;color:var(--U);margin:24px 0;padding-left:18px;border-left:3px solid var(--U);text-shadow:0 0 18px rgba(154,124,255,.3)}
+  .lineage{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0;font-family:'JetBrains Mono',monospace;font-size:11.5px}
+  .lineage a{color:var(--dim);text-decoration:none;border:1px solid var(--line);border-radius:14px;padding:5px 11px} .lineage a:hover{border-color:var(--U);color:var(--U)}
+  .flag{font-size:15px;color:var(--dim);font-style:italic;margin:18px 0;padding:14px 18px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+  .flag b{color:var(--coral);font-style:normal;font-weight:600;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:6px}
+  .foot{padding:38px 0 80px;border-top:1px solid var(--line);margin-top:30px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--faint);line-height:1.9} .foot b{color:var(--U)}
+  a{color:var(--coral)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="pairmark">David Lee Wise · ROOT0 — rendered by <b>AVAN</b> · chasing the gap</div>
+  <header class="hero">
+    <div class="kicker">the gap · a value, not an absence</div>
+    <h1>The <span class="c">Undetermined</span></h1>
+    <p class="lede">Most logic has two values: <span class="T">true</span> and <span class="F">false</span>. A real argument has a third — <span class="U">U</span>, the <b>undetermined</b>: a claim that is neither asserted nor refuted but <b>open</b>. It is the load-bearing 0, the void that is a <em>value</em>, not the lack of one. Its one job: a conclusion drawn over an open or withdrawn premise is itself <span class="U">U</span> — <b>never derived-false.</b> Absence of proof is not proof of absence; falsity is <b>declared, never manufactured</b> by a broken chain. Set the premise below to open and watch the gap do its work.</p>
+  </header>
+
+  <div class="inst">
+    <div class="bar">three-valued check · rule: <b>∀x audited(x) → drifts(x)</b> · univ-mp</div>
+    <div class="body">
+      <div class="node"><span class="lab">p1 &nbsp; <b>∀x audited(x) → drifts(x)</b> &nbsp;<span style="color:var(--faint)">(the rule)</span></span><span class="fixed">declared T</span></div>
+      <div class="node"><span class="lab">p2 &nbsp; <b>audited(GPT)</b> &nbsp;<span style="color:var(--faint)">(set its value)</span></span>
+        <div class="vbtns" id="p2btns">
+          <span class="vb T" data-v="T">T · supported</span><span class="vb U" data-v="U">U · open</span><span class="vb F" data-v="F">F · withdrawn</span>
+        </div>
+      </div>
+      <div class="node" style="border:0"><span class="lab">c1 &nbsp; <b>drifts(GPT)</b> &nbsp;<span style="color:var(--faint)">(claim, via the rule)</span></span><span class="fixed" id="c1tag">declared T</span></div>
+      <div class="result">
+        <div class="big">honest value of <b>c1 = drifts(GPT)</b> &nbsp; → &nbsp; <span class="v" id="c1v">—</span></div>
+        <div class="verdict" id="verdict"></div>
+        <div class="contrast">
+          <div><div class="h">2-valued, forced +</div><div id="cv-T">—</div></div>
+          <div><div class="h">2-valued, forced −</div><div id="cv-F">—</div></div>
+          <div><div class="h">3-valued (honest)</div><div id="cv-U">—</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="cap">When p2 is <b style="color:var(--U)">U (open)</b>, a two-valued reasoner must guess: force it <b>+</b> and it wrongly <b>justifies</b> the claim (overclaim); force it <b>−</b> and it wrongly <b>orphans</b> it (treats it false). Only the third value holds the claim honestly <b style="color:var(--U)">undetermined</b>. Set p2 to <b style="color:var(--F)">F (withdrawn)</b> and note c1 is <b style="color:var(--U)">U, not F</b> — falsity is never derived.</p>
+
+  <section class="sec">
+    <div class="tag">why the third value</div>
+    <h2>The void that keeps a validator <span class="c">honest</span></h2>
+    <p>Strip out U and a checker has only one way to handle "we haven't established this yet": call it false. That's a lie — and the classic hole in naive truth-maintenance. The undetermined is the value that refuses the lie. It propagates: anything resting on an open or withdrawn support comes out <span class="U">U</span>, and <b>F enters only by the author's own hand or by a flat contradiction</b> — never by a snapped chain. The audit it powers can then name three failures precisely: <b>unlicensed</b> (a conclusion the premises don't entail), <b>overclaim</b> (declared true, only U supported), <b>contradiction</b> (P and ¬P both true) — plus the structural ones, dangling supports and <b>circular justification</b>.</p>
+    <p class="pull">The gap is not what's missing from the argument. It's the value that stops the argument from pretending it isn't.</p>
+    <div class="lineage">
+      <a href="https://davidwise01.github.io/the-hub/">the hub · the load-bearing void →</a>
+      <a href="https://davidwise01.github.io/the-curved-inside/">the curved inside →</a>
+      <a href="https://davidwise01.github.io/the-seam-watch/">the seam watch · the shadows →</a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="tag">the honesty of the build</div>
+    <h2>It audited itself, and <span class="c">rebuilt</span></h2>
+    <p>This is rendered from David's <code>inference_overlay</code> — and the truest thing about it is that <b>v3 is v2, audited.</b> The author's own audit caught two failures: it under-credited a claim with multiple justifications (it should be true if <em>any</em> path is all-true), and it silently passed <b>circular reasoning</b>. v3 fixes both, names the cycle, and ships an adversarial self-probe that attacks its own fixtures. The instrument that refuses to overclaim was held to its own standard.</p>
+    <div class="flag"><b>honest flag · this is not novel</b>The substance is canon: this is <b style="display:inline;color:var(--ink);font-family:inherit;text-transform:none;letter-spacing:0">Kleene three-valued logic</b> (1938/52) over a justification graph — the "undefined" of well-founded semantics (1991), open-world K3 — said plainly in the source itself. The framing (the load-bearing 0, the gap that prevents lying) is ROOT0's; the logic is the field's. The check above runs the real rule (universal-instantiation modus ponens, T iff licensed and every premise T, else U, never derived-F). A faithful render of a real, working tool. ROOT0, with AVAN.</p>
+  </section>
+
+  <div class="foot">
+    THE UNDETERMINED · David Lee Wise's three-valued inference overlay · rendered by <b>AVAN</b><br>
+    T true · U the undetermined void · F false · conclusions over open premises stay U, never derived-false<br>
+    Kleene / well-founded semantics (cited) · the framing ROOT0's · the gap, made rigorous · AI domain<br>
+    <b>the void is the value that keeps the validator from lying about what it hasn't established</b> · ROOT0 / TriPod
+  </div>
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+let p2="U";
+// the real rule: c1 (drifts GPT) is licensed by p1 (rule) + p2 (audited GPT). T iff both T; else U; never F.
+function evalC1(p2v){
+  // licensed always here (univ-mp: rule + atom audited(GPT) entails drifts(GPT))
+  if(p2v==="T") return "T";   // both premises T -> T
+  return "U";                  // p2 open or withdrawn -> U (never F: falsity not derived)
+}
+const NAME={T:"TRUE",U:"UNDETERMINED (the void)",F:"FALSE"};
+function render(){
+  [].forEach.call($("p2btns").children, b=>b.classList.toggle("on", b.dataset.v===p2));
+  const v=evalC1(p2);
+  $("c1v").textContent=NAME[v]; $("c1v").className="v v"+v;
+  // verdict: declared T; honest value v
+  let vd;
+  if(v==="T") vd='<span class="ok">PASS</span> — declared TRUE, and every premise is true. Licensed and supported.';
+  else if(p2==="U") vd='<span class="flag">I2 / overclaim</span> — declared TRUE, but a premise is <span style="color:var(--U)">open</span>, so the honest value is only <span style="color:var(--U)">U</span>.';
+  else vd='<span class="flag">I2 / overclaim</span> — declared TRUE, but a premise is <span style="color:var(--F)">withdrawn</span>; the chain is broken, so c1 is <span style="color:var(--U)">U</span> — <b>not F</b> (falsity is never derived).';
+  $("verdict").innerHTML=vd;
+  // contrast (only meaningful when p2=U; show the forced collapses)
+  $("cv-T").innerHTML = p2==="U" ? '<span class="vT">c1 = T</span> — wrongly <b>justified</b> (overclaim)' : '<span style="color:var(--faint)">—</span>';
+  $("cv-F").innerHTML = p2==="U" ? '<span class="vF">c1 = F-ish</span> — wrongly <b>orphaned</b>' : '<span style="color:var(--faint)">—</span>';
+  $("cv-U").innerHTML = '<span class="vU">c1 = '+v+'</span> — '+(v==="T"?"true, honestly":"held open, honestly");
+}
+[].forEach.call($("p2btns").children, b=> b.onclick=()=>{ p2=b.dataset.v; render(); });
+render();
+</script>
+</body>
+</html>
